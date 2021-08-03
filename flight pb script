@@ -1,0 +1,55 @@
+--UI LIBRARY/GUI 
+local VLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/vep1032/VepStuff/main/Rgb%20Ui"))()
+
+MAINTTL = "Project:Beatdown" 
+
+local win = VLib:Window("Flights Script", Color3.fromRGB(196, 40, 28))
+
+
+--TABS
+local ss = win:Tab("MAIN")
+local dd = win:Tab("MISC")
+
+--TABS
+
+--MAIN 
+
+Stats_Table = {"Dura Farm","Bags Farm"}
+ 
+ss:Dropdown("Stat To Farm",Stats_Table,function(t)
+stat = t 
+end) 
+
+ss:Toggle("Start Farm",function(t)
+statfarm = t 
+while statfarm do wait() 
+pcall(function()
+
+if stat == "Dura Farm" then 
+
+elseif stat == "Bags Farm" then 
+
+end
+end) 
+end 
+end) 
+
+local func = coroutine.create(function()
+    while wait() do
+      if not getgenv().toggle then coroutine.yield() end 
+        for i,v in pairs(game:GetService("Players").LocalPlayer.Character:GetChildren()) do
+            if v.Name == "CombatStun" or v.Name == "Stun" then
+                v:Destroy()
+            end
+        end
+    end
+    end)
+    dd:Toggle("No Stun",function(value)
+      getgenv().toggle = value
+      if getgenv().toggle then 
+        coroutine.resume(func)
+      end
+    end)
+
+
+
