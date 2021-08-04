@@ -1,0 +1,85 @@
+--UI LIBRARY/GUI 
+local VLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/vep1032/VepStuff/main/Rgb%20Ui"))()
+
+MAINTTL = "Games" 
+
+local win = VLib:Window("Flights Script", Color3.fromRGB(196, 40, 28))
+
+
+--TABS
+local main = win:Tab("MAIN")
+local dd = win:Tab("MISC")
+local ff = win:Tab("TELEPORTS")
+-- TABS END
+
+main:Toggle("Auto Mana Charge",function(t)
+    mana = t 
+    while mana do wait()
+        pcall(function()
+    game:GetService("ReplicatedStorage").ChargeEvent:FireServer("Charge")
+
+end)
+end
+end)
+
+local manastop = game:GetService("ReplicatedStorage").ChargeEvent:FireServer("Stop")
+       if manastop then 
+           manastop:Destroy()
+          
+end
+
+local func = coroutine.create(function()
+    while wait() do
+      if not getgenv().toggle then coroutine.yield() end 
+        for i,v in pairs(game:GetService("Players").LocalPlayer.Character:GetChildren()) do
+            if v.Name == "CombatStun" or v.Name == "Stun"  or v.Name == "StunCombat" or v.Name == "stunned" then
+                v:Destroy()
+            end
+        end
+    end
+    end)
+    dd:Toggle("No Stun",function(value)
+      getgenv().toggle = value
+      if getgenv().toggle then 
+        coroutine.resume(func)
+      end
+    end)
+
+main:Toggle("Auto Trinket",function(t)
+    trin = t 
+    while trin do wait()
+ if game:GetService("Workspace").Trinkets.Spawn.Ready then 
+     fireclickdetector(Spawn)
+
+end
+end
+end)
+
+ff:Button("SkyCastle",function(t)
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(369.1875, 5028.8315429688, 23.842308044434)
+end)
+
+ff:Button("Ravine",function(t)
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(884.76715087891, 2704.9165039063, -864.32403564453)
+end)
+
+ff:Button("Sigil",function(t)
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-468.44186401367, 2669.6940917969, 602.43975830078)
+end)
+
+ff:Button("Tundra",function(t)
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-406.79531860352, 2664.7741699219, 567.39678955078)
+end)
+
+ff:Button("Forest",function(t)
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(939.63128662109, 2730.8081054688, 126.49517822266)
+end)
+
+ff:Button("Shallow Forest",function(t)
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-195.6369934082, 2735.8669433594, -1267.0119628906)
+end)
+
+ff:Button("Solan",function(t)
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-83.836097717285, 2712.5576171875, 1139.9191894531)
+end)
+
