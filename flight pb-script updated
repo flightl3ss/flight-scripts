@@ -1,0 +1,107 @@
+--UI LIBRARY/GUI 
+local VLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/vep1032/VepStuff/main/Rgb%20Ui"))()
+
+MAINTTL = "Project:Beatdown" 
+
+local win = VLib:Window("Flights Script", Color3.fromRGB(196, 40, 28))
+
+
+--TABS
+local ss = win:Tab("MAIN")
+local dd = win:Tab("MISC")
+local ff = win:Tab("TRAINERS")
+--TABS
+
+--MAIN 
+local TS = game:GetService("TweenService")
+    
+
+ss:Toggle("Dura Farm - Once used, gotta rejoin",function(t)
+     dura = t 
+    
+     while dura do wait() 
+     
+     game:GetService("RunService").Heartbeat:Connect(function()
+     game.Players.LocalPlayer.Character:FindFirstChild("Humanoid"):ChangeState(11)
+     local tween = TS:Create(game.Players.LocalPlayer.Character.HumanoidRootPart, TweenInfo.new(4), {CFrame = CFrame.new(-63.113319396973, 3.0499992370605, 85.246978759766)})
+     tween:Play()
+        end)
+    end
+end)
+
+
+ss:Toggle("Bags Farm",function(t)
+
+end)
+
+
+
+local func = coroutine.create(function()
+    while wait() do
+      if not getgenv().toggle then coroutine.yield() end 
+        for i,v in pairs(game:GetService("Players").LocalPlayer.Character:GetChildren()) do
+            if v.Name == "CombatStun" or v.Name == "Stun" then
+                v:Destroy()
+            end
+        end
+    end
+    end)
+    dd:Toggle("No Stun",function(value)
+      getgenv().toggle = value
+      if getgenv().toggle then 
+        coroutine.resume(func)
+      end
+    end)
+
+dd:Toggle("Tourney Middle",function(t)
+    tourney =t 
+    while tourney do wait()
+        pcall(function()
+     game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(66.321655273438, -383.52612304688, 1026.7509765625)
+end)
+end
+end)
+
+    local tool_table = {} 
+    for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do 
+        if v:IsA("Tool") then 
+            table.insert(tool_table,v.Name)
+        end 
+end 
+SelectedWeapon = nil 
+
+    ss:Dropdown("Select Tool",tool_table,function(SelectedOption)
+        SelectedWeapon = SelectedOption
+    end)
+    
+    ss:Toggle("AutoEquip",function(t)
+Equip = t 
+while Equip do wait()
+    pcall(function()
+                   for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+               if v.Name == SelectedWeapon then 
+   game.Players.LocalPlayer.Character.Humanoid:EquipTool(v)
+                    end 
+                   end
+                end)
+            end 
+    end)
+   
+ss:Toggle("Auto Hit (you need for dura or bags)",function(t)
+    hit = t 
+    while hit do wait()
+    pcall(function()
+        game:GetService("VirtualInputManager"):SendMouseButtonEvent(0, 0, 0, true, game, 1)
+wait(.2)
+game:GetService("VirtualInputManager"):SendMouseButtonEvent(0, 0, 0, false, game, 1)
+end)
+end
+end)
+
+dd:Toggle("Inf Stam",function(t)
+    stam = t 
+    while stam do wait()
+        
+game:GetService("Players").LocalPlayer.Backpack.Combat.RunEvent:FireServer(false)
+    end
+end)
