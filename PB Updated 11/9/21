@@ -1,0 +1,97 @@
+--UI LIBRARY/GUI 
+local VLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/vep1032/VepStuff/main/Rgb%20Ui"))()
+
+MAINTTL = "Games" 
+
+local win = VLib:Window("Flights Script", Color3.fromRGB(196, 40, 28))
+
+
+--TABS
+local ss = win:Tab("AUTO FARMS")
+local dd = win:Tab("PLAYER")
+local ff = win:Tab("TELEPORTS")
+local tween = game:GetService("TweenService")
+-- TABS END
+
+
+
+ss:Toggle("Money Farm",function(t)
+    _G.autoPizza = t
+    _G.speed = 15;
+
+loadstring(game:HttpGet("https://raw.githubusercontent.com/french-spy/roblox-scripts/main/project%20breakdown%20auto%20money%20obf.lua"))();
+game:GetService("Players").LocalPlayer.Backpack.Combat.GripEvent = false
+
+end)
+
+ss:Toggle("Dura Farm - Once used, gotta rejoin",function(t)
+     dura = t 
+    
+     while dura do wait() 
+     
+     game:GetService("RunService").Heartbeat:Connect(function()
+     game.Players.LocalPlayer.Character:FindFirstChild("Humanoid"):ChangeState(11)
+     local tween = TS:Create(game.Players.LocalPlayer.Character.HumanoidRootPart, TweenInfo.new(4), {CFrame = CFrame.new(-63.113319396973, 3.0499992370605, 85.246978759766)})
+     tween:Play()
+        end)
+    end
+end)
+
+
+ss:Toggle("Strength Dummies",function(t)
+    str = t 
+    while str do wait()
+       
+    end   
+end)
+
+local func = coroutine.create(function()
+    while wait() do
+      if not getgenv().toggle then coroutine.yield() end 
+        for i,v in pairs(game:GetService("Players").LocalPlayer.Character:GetChildren()) do
+            if v.Name == "CombatStun" or v.Name == "Stun"  or v.Name == "StunCombat" or v.Name == "stunned" then
+                v:Destroy()
+            end
+        end
+    end
+    end)
+    dd:Toggle("No Stun",function(value)
+      getgenv().toggle = value
+      if getgenv().toggle then 
+        coroutine.resume(func)
+      end
+    end)
+    
+ss:Toggle("Rank Farm aka not giving anyone XD",function(t)
+    rank = t 
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(271.63027954102, 3.5000002384186, -445.41149902344)
+    while rank do wait()
+        fireclickdetector(game:GetService("Workspace").BoxRing.Board.ClickDetector)
+        
+    end
+    
+end)
+
+
+ss:Toggle("Kill Farm(use for Rank farm)",function(t)
+game:GetService("Players").LocalPlayer.Backpack.Combat.GripEvent = true 
+end)
+
+ss:Toggle("Auto Hit (you need for dura or bags)",function(t)
+    hit = t 
+    while hit do wait()
+    pcall(function()
+        game:GetService("VirtualInputManager"):SendMouseButtonEvent(0, 0, 0, true, game, 1)
+wait(.2)
+game:GetService("VirtualInputManager"):SendMouseButtonEvent(0, 0, 0, false, game, 1)
+end)
+end
+end)
+
+dd:Toggle("Inf Stam",function(t)
+    stam = t 
+    while stam do wait()
+        
+game:GetService("Players").LocalPlayer.Backpack.Combat.RunEvent:FireServer(false)
+    end
+end)
